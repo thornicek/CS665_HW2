@@ -5,14 +5,14 @@ import java.util.ArrayList;
 public class Shop implements PublisherBase {
 	
 	private String name;
-	private String deliveryUpdate;
+	public DeliveryRequest delivery;
 	
 	
 	private ArrayList<SubscriberBase> deliveryDriverList = new ArrayList<SubscriberBase>();
 	
 	public Shop(String name) {
 		this.name = name;
-		this.setDeliveryRequest("Product X");
+		this.setDeliveryRequest(delivery);
 	}
 	
 	String getName() {
@@ -24,8 +24,8 @@ public class Shop implements PublisherBase {
 	}
 	
 	// Method to notify the subscribers that product is ready for delivery
-	public void setDeliveryRequest(String deliveryUpdate) {
-		this.deliveryUpdate = deliveryUpdate;
+	public void setDeliveryRequest(DeliveryRequest delivery) {
+		this.delivery = delivery;
 		this.notifySubscribers();	
 	}
 	
@@ -47,7 +47,7 @@ public class Shop implements PublisherBase {
 	@Override
 	public void notifySubscribers() {
 		for(SubscriberBase o : deliveryDriverList) {
-			o.updateSelf(this.deliveryUpdate);
+			o.updateSelf(this.delivery);
 		}
 		
 	}
